@@ -1,6 +1,7 @@
 package app;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class AgeChecker {
@@ -16,6 +17,9 @@ public class AgeChecker {
         age = new JTextField("18");
         result = new JTextField();
         frame.setSize(500, 500);
+
+        check_button.setBorder(new RoundBorder(10));
+        enter_age.setFont(new Font("Arial",Font.PLAIN,20));
 
         enter_age.setBounds(160, 100, 150, 30);
         age.setBounds(160, 140, 150, 30);
@@ -36,6 +40,7 @@ public class AgeChecker {
 
         frame.setLayout(null);
         frame.setVisible(true);
+
     }
 
     public void ageChecker() {
@@ -44,6 +49,27 @@ public class AgeChecker {
             result.setText("yes you can enter");
         } else {
             result.setText("no you can't");
+        }
+    }
+
+    public static class RoundBorder implements Border {
+        int radius = 0;
+        RoundBorder(int radius)    {
+            this.radius = radius;
+        }
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+        }
+
+        @Override
+        public Insets getBorderInsets(Component c) {
+            return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+        }
+
+        @Override
+        public boolean isBorderOpaque() {
+            return true;
         }
     }
 
